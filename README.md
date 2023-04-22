@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>SCMLite - Sistem Informasi - Supply Chain Management I - Pabrik Laptop</title>
   </head>
   <body>
     <h1>SCMLite</h1>
