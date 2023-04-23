@@ -65,4 +65,27 @@
     @yield('scripts')
     @yield('styles')
   </body>
+  <footer class="bg-dark text-white py-3 text-center">
+    <div class="container">
+      <div class="row d-flex flex-column flex-md-row">
+        <div class="col-md-6 text-md-left text-center">
+          <h5>About SCMLite</h5>
+          <p>SCMLite is a simple inventory management system designed for small and medium-sized businesses.</p>
+        </div>
+        <div class="col-md-6 text-md-left text-center">
+          <h5>Contact Us</h5>
+          <ul class="list-unstyled">
+            <li><i class="fas fa-envelope"></i> hannessinaga77@gmail.com</li>
+            <li><i class="fas fa-phone"></i> +62 135 712 2634</li>
+            <li><i class="fas fa-map-marker-alt"></i> JL Raya Klampok, Belakang Balai Desa RT/RW 04/02, Singosari, Kabupaten Malang</li>
+          </ul>
+        </div>
+      </div>
+      <div class="row mt-md-0 mt-3">
+        <div class="col-md-12 text-md-left text-center">
+          &copy; 2023 SCMLite. All Rights Reserved.
+        </div>
+      </div>
+    </div>
+  </footer>
 </html>

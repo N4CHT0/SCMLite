@@ -1,4 +1,4 @@
-@extends('stok.app')
+@extends('gudang.app')
 @section('content')
     <div class="d-flex justify-content-center flex-column align-items-center">
         <h4>Add Stok</h4>

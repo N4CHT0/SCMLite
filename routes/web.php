@@ -43,9 +43,9 @@ Route::get('/kategori/edit/{id}', [KategoriBarangController::class, 'edit'])->na
 Route::put('/kategori/update/{id}', [KategoriBarangController::class, 'update'])->name('kategori.update');
 Route::get('/kategori/delete/{id}', [KategoriBarangController::class, 'destroy']);
 
-Route::get('/gudang', [GudangController::class, 'index'])->name('gudang.index');
-Route::get('/gudang/create', [GudangController::class, 'addView'])->name('gudang.create');
-Route::post('/gudang', [GudangController::class, 'store']);
+Route::get('/gudang/index', [GudangController::class, 'index'])->name('gudang.index')->middleware(['auth', 'role:gudang,admin']);
+Route::get('/gudang/create', [GudangController::class, 'addView'])->name('gudang.create')->middleware(['role:gudang']);
+Route::post('/gudang', [GudangController::class, 'store'])->name('gudang.store')->middleware(['role:gudang']);
 Route::get('/gudang/edit/{id}', [GudangController::class, 'edit'])->name('gudang.edit');
 Route::put('/gudang/update/{id}', [GudangController::class, 'update'])->name('gudang.update');
 Route::get('/gudang/delete/{id}', [GudangController::class, 'destroy']);
@@ -85,7 +85,7 @@ Route::get('/supir/edit/{id}', [SupirController::class, 'edit'])->name('supir.ed
 Route::put('/supir/update/{id}', [SupirController::class, 'update'])->name('supir.update');
 Route::get('/supir/delete/{id}', [SupirController::class, 'destroy']);
 
-Route::get('/pengiriman', 'PengirimanController@index')->name('pengiriman.index')->middleware(['auth', 'role:pengiriman']);
+Route::get('/pengiriman/index', [PengirimanController::class, 'index'])->name('pengiriman.index')->middleware(['auth', 'role:pengiriman']);
 Route::get('/pengiriman/create', [PengirimanController::class, 'addView'])->name('pengiriman.create');
 Route::post('/pengiriman', [PengirimanController::class, 'store']);
 Route::get('/pengiriman/edit/{id}', [PengirimanController::class, 'edit'])->name('pengiriman.edit');
@@ -117,7 +117,7 @@ Route::get('/admin', function () {
     return view('admin.home');
 })->middleware(['auth', 'role:admin']);
 
-Route::get('/gudang', function () {
+Route::get('/gudang/home-page', function () {
     return view('gudang.home');
 })->middleware(['auth', 'role:gudang']);
 
