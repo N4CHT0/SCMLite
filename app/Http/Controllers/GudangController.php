@@ -10,7 +10,7 @@ class GudangController extends Controller
 {
     public function index()
     {
-        $gudang = Gudang::paginate(5);
+        $gudang = Gudang::paginate(100);
 
         return view('gudang.index', [
             'gudang' => $gudang,
@@ -24,6 +24,10 @@ class GudangController extends Controller
 
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'nama_gudang' => 'required|min:3',
+        ]);
+
         $data = [
             'nama_gudang' => $request->input('nama_gudang'),
             'alamat_gudang' => $request->input('alamat_gudang'),
@@ -31,9 +35,9 @@ class GudangController extends Controller
             'created_at' => Carbon::now(),
         ];
 
-        Gudang::create($data);
+        $gudang = Gudang::create($data);
 
-        return redirect()->route('gudang.index');
+        return redirect()->back()->with('success', 'Gudang Berhasil Ditambahkan');
     }
 
     public function edit($id)
@@ -44,18 +48,22 @@ class GudangController extends Controller
 
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'nama_gudang' => 'required|min:3',
+        ]);
+
         $gudang = Gudang::findOrFail($id);
         $gudang->nama_gudang = $request->nama_gudang;
         $gudang->alamat_gudang = $request->alamat_gudang;
         $gudang->save();
 
-        return redirect('/gudang');
+        return redirect()->route('gudang.index')->with('success', 'Gudang Berhasil Di Edit');
     }
 
     public function destroy($id)
     {
         $gudang = Gudang::findOrFail($id);
         $gudang->delete();
-        return redirect('/gudang');
+        return redirect()->back()->with('success', 'Gudang Berhasil Dihapus (Silahkan Cek Trash Gudang)');
     }
 }

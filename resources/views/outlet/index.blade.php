@@ -1,12 +1,13 @@
-@extends('layouts.app')
-
+@extends('template.home')
+@section('title', 'DAFTAR-OUTLET')
+@section('sub-title','Data Outlet')
 @section('content')
-<div class="container">
-    <div class="d-flex justify-content-between mb-2">
-        <h4>Data Outlet</h4>
-        <a href="{{ route('outlet.create') }}" class="btn btn-primary">Tambah Outlet</a>
-    </div>
-    <table class="table">
+
+    <a href="{{ route('outlet.create') }}" class="btn btn-info btn-sm">Tambah Outlet</a>
+    <a href="{{ route('outlet.pdf') }}" class="btn btn-danger btn-sm"><i class="fas fa-print"></i> Ekspor Ke PDF</a>
+    <br><br>
+
+    <table class="table table-striped table-hover table-sm table-bordered" id="example">
         <thead>
             <tr>
                 <th scope="col">ID</th>
@@ -22,13 +23,12 @@
                 <td>{{ $item->nama_outlet }}</td>
                 <td>{{ $item->alamat_outlet }}</td>
                 <td>
-                    <a class="btn btn-warning" href="/outlet/edit/{{$item->id}}">Edit</a>
-                    <a class="btn btn-danger" href="/outlet/delete/{{$item->id}}" onclick="return confirm('Are You Sure')">Delete</a>
+                    <a class="btn btn-primary btn-sm" href="/outlet/edit/{{$item->id}}">Edit</a>
+                    <a class="btn btn-danger btn-sm" href="/outlet/delete/{{$item->id}}" onclick="return confirm('Are You Sure')">Delete</a>
                 </td>
             </tr>
             @endforeach
         </tbody>
     </table>
-    {{ $outlet->links() }}
-</div>
+
 @endsection

@@ -10,7 +10,7 @@ class KategoriBarangController extends Controller
 {
     public function index()
     {
-        $kategori = KategoriBarang::paginate(5);
+        $kategori = KategoriBarang::paginate(100);
 
         return view('kategori.index', [
             'kategori' => $kategori,
@@ -24,6 +24,10 @@ class KategoriBarangController extends Controller
 
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'nama_kategori_barang' => 'required|min:3',
+        ]);
+
         $data = [
             'nama_kategori_barang' => $request->input('nama_kategori_barang'),
             'deskripsi' => $request->input('deskripsi'),
@@ -31,9 +35,9 @@ class KategoriBarangController extends Controller
             'created_at' => Carbon::now(),
         ];
 
-        KategoriBarang::create($data);
+        $kategori = KategoriBarang::create($data);
 
-        return redirect()->route('kategori.index');
+        return redirect()->back()->with('success', 'Kategori Berhasil Ditambahkan');
     }
 
     public function edit($id)
@@ -44,18 +48,22 @@ class KategoriBarangController extends Controller
 
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'nama_kategori_barang' => 'required|min:3',
+        ]);
+
         $kategori = KategoriBarang::findOrFail($id);
         $kategori->nama_kategori_barang = $request->nama_kategori_barang;
         $kategori->deskripsi = $request->deskripsi;
         $kategori->save();
 
-        return redirect('/kategori');
+        return redirect()->route('kategori.index')->with('success', 'Kategori Berhasil Di Edit');
     }
 
     public function destroy($id)
     {
         $kategori = KategoriBarang::findOrFail($id);
         $kategori->delete();
-        return redirect('/kategori');
+        return redirect()->back()->with('success', 'Barang Berhasil Dihapus (Silahkan Cek Trash Barang)');
     }
 }

@@ -1,9 +1,17 @@
-@extends('layouts.app')
-
+@extends('template.home')
+@section('title', 'EDIT-KATEGORI')
+@section('sub-title','Edit Kategori')
 @section('content')
-    <div class="d-flex justify-content-center flex-column align-items-center">
-        <h4>Edit Kategori</h4>
-        <form action="/kategori/update/{{$kategori->id}}" method="POST" class="w-25 mt-3">
+
+        @if (count($errors)>0)
+            @foreach ($errors->all() as $error)
+                <div class="alert alert-danger" role="alert">
+                    {{ $error }}
+                </div>
+            @endforeach
+        @endif
+
+        <form action="{{ route('kategori.update' ,$kategori->id ) }}" method="POST" class="">
             @csrf
             @method('PUT')
             <div class="mb-3">
@@ -14,7 +22,7 @@
                 <label for="deskripsi" class="form-label">Deskripsi</label>
                 <input type="text" class="form-control" id="deskripsi" name="deskripsi" placeholder="Masukkan Deskripsi" value="{{$kategori->deskripsi}}">
             </div>
-            <button class="btn btn-primary" type="submit">Simpan</button>
+            <button class="btn btn-primary btn-block" type="submit">Simpan</button>
         </form>
-    </div>
+
 @endsection

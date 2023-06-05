@@ -1,8 +1,9 @@
-@extends('pengiriman.app')
+@extends('template.home')
+@section('title', 'EDIT-PENGIRIMAN')
+@section('sub-title','Edit Pengiriman')
 @section('content')
-    <div class="d-flex justify-content-center flex-column align-items-center">
-        <h4>Edit Pengiriman</h4>
-        <form action="/pengiriman/update/{{$pengiriman->id}}" method="POST" class="w-25 mt-3">
+
+        <form action="/pengiriman/update/{{$pengiriman->id}}" method="POST" class="">
             @csrf
             @method('PUT')
             <div class="form-group">
@@ -41,19 +42,19 @@
                     @endforeach
                 </select>
             </div>
-            <div class="mb-3">
+            <div class="form-group">
                 <label for="tanggal_pengiriman" class="form-label">Tanggal Pengiriman</label>
                 <div class="input-group">
-                  <input type="text" class="form-control" id="tanggal_pengiriman" name="tanggal_pengiriman" placeholder="Masukan Tanggal Pengiriman"value="{{$pengiriman->tanggal_pengiriman}}">
+                  <input type="date" class="form-control" id="tanggal_pengiriman" name="tanggal_pengiriman" placeholder="Masukan Tanggal Pengiriman"value="{{$pengiriman->tanggal_pengiriman}}">
                   <span class="input-group-text" id="tanggal_pengiriman-addon"><i class="bi bi-calendar"></i></span>
                 </div>
             </div>
-            <div class="mb-3">
+            <div class="form-group">
                 <label for="status_pengiriman" class="form-label">Status Pengiriman</label>
                 <input type="text" class="form-control" id="status_pengiriman" name="status_pengiriman" placeholder="Masukan Status Pengiriman" value="{{$pengiriman->status_pengiriman}}">
             </div>
-            <button type="submit" class="btn btn-primary">Simpan</button>
-            <a href="{{ route('rute.index') }}" class="btn btn-secondary">Batal</a>
+            <button type="submit" class="btn btn-primary btn-block">Simpan</button>
+            <a href="{{ route('pengiriman.index') }}" class="btn btn-secondary btn-block">Batal</a>
         </form>
     </div>
 @endsection

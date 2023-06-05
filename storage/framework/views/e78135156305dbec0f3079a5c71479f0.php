@@ -1,25 +1,24 @@
+<?php $__env->startSection('title', 'DAFTAR-PENGIRIMAN'); ?>
+<?php $__env->startSection('sub-title','Daftar Pengiriman'); ?>
+
 <?php $__env->startSection('content'); ?>
-<div class="container">
-    <div class="row justify-content-between align-items-center mb-4">
-        <div class="col-lg-6 text-lg-left mb-3 mb-lg-0">
-            <a href="<?php echo e(route('pengiriman.create')); ?>" class="btn btn-primary px-lg-4">Tambah Pengiriman</a>
+
+        <div class="btn-group mb-3" role="group" aria-label="Basic Example">
+            <a href="<?php echo e(route('pengiriman.create')); ?>" class="btn btn-info btn-sm"><i class="fas fa-copy"></i> Tambah Pengiriman</a>
+            <a href="<?php echo e(route('pengiriman.pdf')); ?>" class="btn btn-danger btn-sm"><i class="fas fa-print"></i> Export Ke PDF</a>
         </div>
-        <div class="col-lg-6">
-            <h4>Data Pengiriman</h4>
-        </div>
-    </div>
-    <div class="table-responsive">
-        <table class="table table-bordered table-striped">
+
+        <table class="table table-striped table-hover table-sm table-bordered" id="example">
             <thead>
                 <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Rute</th>
-                    <th scope="col">Outlet</th>
-                    <th scope="col">Truk</th>
-                    <th scope="col">Supir</th>
-                    <th scope="col">Tanggal Pengiriman</th>
-                    <th scope="col">Status Pengiriman</th>
-                    <th scope="col">Action</th>
+                    <th>ID</th>
+                    <th>Kota Tujuan</th>
+                    <th>Outlet</th>
+                    <th>Truk</th>
+                    <th>Supir</th>
+                    <th>Tanggal Pengiriman</th>
+                    <th>Status Pengiriman</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -33,43 +32,14 @@
                     <td><?php echo e($item->tanggal_pengiriman); ?></td>
                     <td><?php echo e($item->status_pengiriman); ?></td>
                     <td>
-                        <a class="btn btn-warning btn-sm" href="/pengiriman/edit/<?php echo e($item->id); ?>">Edit</a>
-                        <a class="btn btn-danger btn-sm" href="/pengiriman/delete/<?php echo e($item->id); ?>" onclick="return confirm('Are You Sure')">Delete</a>
+                        <a class="btn btn-primary btn-sm" href="/pengiriman/edit/<?php echo e($item->id); ?>"><i class="fas fa-edit"></i> Edit</a>
+                        <a class="btn btn-danger btn-sm" href="/pengiriman/delete/<?php echo e($item->id); ?>" onclick="return confirm('Are You Sure')"><i class="fas fa-trash"></i> Hapus</a>
                     </td>
                 </tr>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </tbody>
         </table>
-    </div>
-    <div class="d-flex justify-content-center">
-        <nav aria-label="Page navigation example">
-            <ul class="pagination">
-                <li class="page-item <?php echo e(($pengiriman->currentPage() == 1) ? ' disabled' : ''); ?>">
-                    <a class="page-link" href="<?php echo e($pengiriman->url(1)); ?>">First</a>
-                </li>
-                <?php if($pengiriman->currentPage() > 1): ?>
-                    <li class="page-item">
-                        <a class="page-link" href="<?php echo e($pengiriman->previousPageUrl()); ?>"><</a>
-                    </li>
-                <?php endif; ?>
-    
-                <?php for($i = 1; $i <= $pengiriman->lastPage(); $i++): ?>
-                    <li class="page-item <?php echo e(($pengiriman->currentPage() == $i) ? ' active' : ''); ?>">
-                        <a class="page-link" href="<?php echo e($pengiriman->url($i)); ?>"><?php echo e($i); ?></a>
-                    </li>
-                <?php endfor; ?>
-    
-                <?php if($pengiriman->currentPage() < $pengiriman->lastPage()): ?>
-                    <li class="page-item">
-                        <a class="page-link" href="<?php echo e($pengiriman->nextPageUrl()); ?>">></a>
-                    </li>
-                <?php endif; ?>
-                <li class="page-item <?php echo e(($pengiriman->currentPage() == $pengiriman->lastPage()) ? ' disabled' : ''); ?>">
-                    <a class="page-link" href="<?php echo e($pengiriman->url($pengiriman->lastPage())); ?>">Last</a>
-                </li>
-            </ul>
-        </nav>
-      </div>
-</div>
+
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('pengiriman.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\SISTEM-INFORMASI-SCM-I\SISCM\resources\views/pengiriman/index.blade.php ENDPATH**/ ?>
+
+<?php echo $__env->make('template.home', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\SISTEM-INFORMASI-SCM-I\SISCM\resources\views/pengiriman/index.blade.php ENDPATH**/ ?>

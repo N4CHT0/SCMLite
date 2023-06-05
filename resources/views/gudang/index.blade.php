@@ -1,13 +1,19 @@
-@extends('gudang.app')
-
+@extends('template.home')
+@section('title', 'DAFTAR-GUDANG')
+@section('sub-title','Data Gudang')
 @section('content')
 
-<div class="container">
-    <div class="d-flex justify-content-between mb-2">
-        <h4>Data Gudang</h4>
-        <a href="{{ route('gudang.create') }}" class="btn btn-primary">Tambah Gudang</a>
+  @if (Session::has('success'))
+    <div class="alert alert-success" role="alert">
+        {{ Session('success') }}
     </div>
-    <table class="table">
+  @endif
+
+  <a href="{{ route('gudang.create') }}" class="btn btn-info btn-sm"><i class="fas fa-copy"></i> Tambah Gudang</a>
+  <a href="{{ route('gudang.pdf') }}" class="btn btn-danger btn-sm"><i class="fas fa-print"></i> Ekspor Ke PDF</a>
+  <br><br>
+
+  <table class="table table-striped table-hover table-sm table-bordered" id="example">
         <thead>
             <tr>
                 <th scope="col">ID</th>
@@ -23,13 +29,16 @@
                 <td>{{ $item->nama_gudang }}</td>
                 <td>{{ $item->alamat_gudang }}</td>
                 <td>
-                    <a class="btn btn-warning" href="/gudang/edit/{{$item->id}}">Edit</a>
-                    <a class="btn btn-danger" href="/gudang/delete/{{$item->id}}" onclick="return confirm('Are You Sure')">Delete</a>
+                    <a class="btn btn-primary btn-sm" href="/gudang/edit/{{$item->id}}"><i class="fas fa-edit"></i> Edit</a>
+                    <form action="{{ route('gudang.destroy', $item->id ) }}" method="POST">
+                        @csrf
+                        @method('delete')
+                        <button type="submit" class="btn btn-danger btn-sm"  onclick="return confirm('Are You Sure')"><i class="fas fa-trash"></i> Hapus</button>
+                    </form>
                 </td>
             </tr>
             @endforeach
         </tbody>
     </table>
-    {{ $gudang->links() }}
-</div>
+
 @endsection

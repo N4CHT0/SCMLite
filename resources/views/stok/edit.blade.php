@@ -1,9 +1,17 @@
-@extends('gudang.app')
-
+@extends('template.home')
+@section('title', 'EDIT-STOK')
+@section('sub-title','Edit Stok')
 @section('content')
-    <div class="d-flex justify-content-center flex-column align-items-center">
-        <h4>Edit Stok</h4>
-        <form action="/stok/update/{{$stok->id}}" method="POST" class="w-25 mt-3">
+
+        @if (count($errors)>0)
+        @foreach ($errors->all() as $error)
+        <div class="alert alert-danger" role="alert">
+            {{ $error }}
+        </div>
+        @endforeach
+        @endif
+
+        <form action="{{ route('stok.update' ,$stok->id ) }}" method="POST" class="">
             @csrf
             @method('PUT')
             <div class="form-group">
@@ -28,7 +36,7 @@
                 <label for="jumlah_stok" class="form-label">Jumlah Stok</label>
                 <input type="text" class="form-control" id="jumlah_stok" name="jumlah_stok" placeholder="Masukkan Jumlah Stok" value="{{$stok->jumlah_stok}}">
             </div>
-            <button class="btn btn-primary" type="submit">Simpan</button>
+            <button class="btn btn-primary btn-block" type="submit">Simpan</button>
         </form>
-    </div>
+
 @endsection

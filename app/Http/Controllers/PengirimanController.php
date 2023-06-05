@@ -14,7 +14,7 @@ class PengirimanController extends Controller
 {
     public function index()
     {
-        $pengiriman = Pengiriman::with(['RTruk', 'RSupir', 'RRute', 'ROutlet'])->paginate(5);
+        $pengiriman = Pengiriman::with(['RTruk', 'RSupir', 'RRute', 'ROutlet'])->paginate(100);
 
         return view('pengiriman.index', [
             'pengiriman' => $pengiriman,
@@ -45,7 +45,7 @@ class PengirimanController extends Controller
 
         Pengiriman::create($data);
 
-        return redirect('/pengiriman');
+        return redirect('/pengiriman/index');
     }
 
     public function edit($id)
@@ -69,13 +69,14 @@ class PengirimanController extends Controller
         $pengiriman->status_pengiriman = $request->status_pengiriman;
         $pengiriman->save();
 
-        return redirect('/pengiriman');
+        return redirect('/pengiriman/index');
     }
 
     public function destroy($id)
     {
         $pengiriman = Pengiriman::findOrFail($id);
         $pengiriman->delete();
-        return redirect('/pengiriman');
+        return redirect('/pengiriman/index');
     }
+
 }

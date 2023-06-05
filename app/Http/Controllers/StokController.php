@@ -12,7 +12,7 @@ class StokController extends Controller
 {
     public function index()
     {
-        $stok = StokBarang::with('RBarang', 'Kategoribarang')->paginate(5);
+        $stok = StokBarang::with('RBarang', 'Kategoribarang')->paginate(100);
 
         return view('stok.index', [
             'stok' => $stok,
@@ -28,6 +28,10 @@ class StokController extends Controller
 
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'jumlah_stok' => 'required|min:1',
+        ]);
+
         $data = [
             'id_barang' => $request->input('id_barang'),
             'id_kategori_barang' => $request->input('id_kategori_barang'),
@@ -36,9 +40,9 @@ class StokController extends Controller
             'created_at' => Carbon::now(),
         ];
 
-        StokBarang::create($data);
+        $stok = StokBarang::create($data);
 
-        return redirect()->route('stok.index');
+        return redirect()->back()->with('success', 'Stok Berhasil Ditambahkan');
     }
 
     public function edit($id)
@@ -51,17 +55,21 @@ class StokController extends Controller
 
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'jumlah_stok' => 'required|min:1',
+        ]);
+
         $stok = StokBarang::findOrFail($id);
         $stok->jumlah_stok = $request->jumlah_stok;
         $stok->save();
 
-        return redirect('/stok');
+        return redirect()->route('stok.index')->with('success', 'Stok Berhasil Di Edit');
     }
 
     public function destroy($id)
     {
         $stok = StokBarang::findOrFail($id);
         $stok->delete();
-        return redirect('/stok');
+        return redirect()->back()->with('success', 'Stok Berhasil Dihapus (Silahkan Cek Trash Stok)');
     }
 }

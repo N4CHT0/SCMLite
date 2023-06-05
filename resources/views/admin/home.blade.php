@@ -1,17 +1,10 @@
-@extends('layouts.app')
+@extends('template.home')
 
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">{{ __('Admin Dashboard') }}</div>
-
-                    <div class="card-body">
-                        {{ __('You are logged in as admin!') }}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+  <div class="section-header">
+    <h1>Selamat Datang</h1>
+  </div>
+  <div class="section-header">
+    <p id="datetime"></p>
+  </div>
 @endsection

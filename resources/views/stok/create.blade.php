@@ -1,8 +1,23 @@
-@extends('gudang.app')
+@extends('template.home')
+@section('title', 'TAMBAH-STOK')
+@section('sub-title','Tambah Stok')
 @section('content')
-    <div class="d-flex justify-content-center flex-column align-items-center">
-        <h4>Add Stok</h4>
-        <form action="/stok" method="POST" class="w-25 mt-3">
+
+        @if (count($errors)>0)
+            @foreach ($errors->all() as $error)
+            <div class="alert alert-danger" role="alert">
+                {{ $error }}
+            </div>
+            @endforeach
+        @endif
+        
+        @if (Session::has('success'))
+        <div class="alert alert-success" role="alert">
+            {{ Session('success') }}
+        </div>
+        @endif
+
+        <form action="{{ route('stok.store') }}" method="POST" class="">
             @csrf
             <div class="form-group">
                 <label for="id_barang" class="form-label">Barang</label>
@@ -22,12 +37,15 @@
                     @endforeach
                 </select>
             </div>
-            <div class="mb-3">
+            <div class="form-group">
                 <label for="jumlah_stok" class="form-label">Jumlah Stok</label>
                 <input type="text" class="form-control" id="jumlah_stok" name="jumlah_stok" placeholder="Masukan Jumlah Stok">
             </div>
-            <button type="submit" class="btn btn-primary">Simpan</button>
-            <a href="{{ route('stok.index') }}" class="btn btn-secondary">Batal</a>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block">Simpan</button>
+                <a href="{{ route('stok.index') }}" class="btn btn-secondary btn-block">Batal</a>
+            </div>
+            
         </form>
-    </div>
+
 @endsection

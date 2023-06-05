@@ -1,9 +1,17 @@
-@extends('gudang.app')
-
+@extends('template.home')
+@section('title', 'EDIT-BARANG')
+@section('sub-title','Edit Barang')
 @section('content')
-    <div class="d-flex justify-content-center flex-column align-items-center">
-        <h4>Edit Barang</h4>
-        <form action="/barang/update/{{$barang->id}}" method="POST" class="w-25 mt-3">
+
+        @if (count($errors)>0)
+        @foreach ($errors->all() as $error)
+        <div class="alert alert-danger" role="alert">
+            {{ $error }}
+        </div>
+        @endforeach
+        @endif
+
+        <form action="{{ route('barang.update' ,$barang->id ) }}" method="POST" class="">
             @csrf
             @method('PUT')
             <div class="form-group">
@@ -32,7 +40,7 @@
                 <label for="harga_barang" class="form-label">Harga Barang</label>
                 <input type="text" class="form-control" id="harga_barang" name="harga_barang" placeholder="Masukkan Harga Barang" value="{{$barang->harga_barang}}">
             </div>
-            <button class="btn btn-primary" type="submit">Simpan</button>
+            <button class="btn btn-primary btn-block" type="submit">Simpan</button>
         </form>
-    </div>
+
 @endsection

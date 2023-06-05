@@ -1,12 +1,21 @@
-@extends('gudang.app')
-
+@extends('template.home')
+@section('title', 'DAFTAR-STOK')
+@section('sub-title','Data Stok Barang')
 @section('content')
-<div class="container">
-    <div class="d-flex justify-content-between mb-2">
-        <h4>Data Stok Barang</h4>
-        <a href="{{ route('stok.create') }}" class="btn btn-primary">Tambah Stok</a>
+
+  @if (Session::has('success'))
+  <div class="alert alert-success" role="alert">
+      {{ Session('success') }}
+  </div>
+  @endif
+
+    <div class="btn-group mb-3" role="group" aria-label="Basic Example">
+        <a href="{{ route('stok.create') }}" class="btn btn-info btn-sm"><i class="fas fa-copy"></i> Tambah Stok</a>
+        <a href="{{ route('stok.pdf') }}" class="btn btn-danger btn-sm"><i class="fas fa-print"></i> Ekspor Ke PDF</a>
     </div>
-    <table class="table">
+
+
+    <table class="table table-striped table-hover table-sm table-bordered" id="example">
         <thead>
             <tr>
                 <th scope="col">ID</th>
@@ -26,13 +35,16 @@
                 <td>{{ $item->jumlah_stok }}</td>
                 <td>{{ $item->updated_at }}</td>
                 <td>
-                    <a class="btn btn-warning" href="/stok/edit/{{$item->id}}">Edit</a>
-                    <a class="btn btn-danger" href="/stok/delete/{{$item->id}}" onclick="return confirm('Are You Sure')">Delete</a>
+                    <a class="btn btn-primary btn-sm" href="/stok/edit/{{$item->id}}"><i class="fas fa-edit"></i> Edit</a>
+                    <form action="{{ route('stok.destroy', $item->id ) }}" method="POST">
+                        @csrf
+                        @method('delete')
+                        <button type="submit" class="btn btn-danger btn-sm"  onclick="return confirm('Are You Sure')"><i class="fas fa-trash"></i> Hapus</button>
+                    </form>
                 </td>
             </tr>
             @endforeach
         </tbody>
     </table>
-    {{ $stok->links() }}
-</div>
+
 @endsection

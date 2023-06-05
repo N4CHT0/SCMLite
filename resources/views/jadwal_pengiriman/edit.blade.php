@@ -1,12 +1,22 @@
-@extends('pengiriman.app')
+@extends('template.home')
+@section('title', 'EDIT-JADWAL')
+@section('sub-title','Edit Jadwal Pengiriman')
 @section('content')
-    <div class="d-flex justify-content-center flex-column align-items-center">
-        <h4>Edit Jadwal</h4>
-        <form action="/jadwal_pengiriman/update/{{$jadwal_pengiriman->id}}" method="POST" class="w-25 mt-3">
+
+        <form action="/jadwal_pengiriman/update/{{$jadwal_pengiriman->id}}" method="POST" class="">
             @csrf
             @method('PUT')
             <div class="form-group">
-                <label for="id_rute" class="form-label">Rute</label>
+                <label for="id_rute" class="form-label">Kota Asal</label>
+                <select class="form-control select2" style="width: 100%;" name="id_rute" id="id_rute"value="{{$jadwal_pengiriman->id_rute}}">
+                    <option disabled value>Pilih Kota Asal</option>
+                    @foreach ($rute_ as $item)
+                        <option value="{{ $item->id }}">{{ $item->kota_asal }}></option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="id_rute" class="form-label">Kota Tujuan</label>
                 <select class="form-control select2" style="width: 100%;" name="id_rute" id="id_rute"value="{{$jadwal_pengiriman->id_rute}}">
                     <option disabled value>Pilih Rute</option>
                     @foreach ($rute_ as $item)
@@ -41,17 +51,17 @@
                     @endforeach
                 </select>
             </div>
-            <div class="mb-3">
+            <div class="form-group">
                 <label for="tanggal_pengiriman" class="form-label">Tanggal Pengiriman</label>
                 <div class="input-group">
-                  <input type="text" class="form-control" id="tanggal_pengiriman" name="tanggal_pengiriman" placeholder="Masukan Tanggal Pengiriman"value="{{$jadwal_pengiriman->tanggal_pengiriman}}">
+                  <input type="datetime-local" class="form-control" id="tanggal_pengiriman" name="tanggal_pengiriman" placeholder="Masukan Tanggal Pengiriman"value="{{$jadwal_pengiriman->tanggal_pengiriman}}">
                   <span class="input-group-text" id="tanggal_pengiriman-addon"><i class="bi bi-calendar"></i></span>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary">Simpan</button>
-            <a href="{{ route('jadwal_pengiriman.index') }}" class="btn btn-secondary">Batal</a>
+            <button type="submit" class="btn btn-primary btn-block">Simpan</button>
+            <a href="{{ route('jadwal_pengiriman.index') }}" class="btn btn-secondary btn-block">Batal</a>
         </form>
-    </div>
+
 @endsection
 
 @section('scripts')
