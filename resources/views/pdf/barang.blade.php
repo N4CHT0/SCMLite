@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Export PDF</title>
     <style>
         body {
@@ -10,49 +11,50 @@
             margin: 0;
             padding: 20px;
         }
-        
+
         h1 {
             text-align: center;
             color: #333;
             margin-bottom: 30px;
         }
-        
+
         .invoice-table {
             width: 100%;
             border-collapse: collapse;
         }
-        
-        .invoice-table th, .invoice-table td {
+
+        .invoice-table th,
+        .invoice-table td {
             padding: 10px;
             border: 1px solid #ddd;
         }
-        
+
         .invoice-table thead {
             background-color: #f9f9f9;
         }
-        
+
         .invoice-table tbody tr:hover {
             background-color: #f5f5f5;
         }
-        
+
         .invoice-table th {
             background-color: #333;
             color: #fff;
             text-align: left;
         }
-        
+
         .invoice-table td:first-child {
             font-weight: bold;
         }
-        
+
         .highlight {
             background-color: #ffd700;
         }
-        
+
         .total-row td {
             font-weight: bold;
         }
-        
+
         .notes {
             margin-top: 30px;
             font-size: 14px;
@@ -60,6 +62,7 @@
         }
     </style>
 </head>
+
 <body>
     <h1>Daftar Barang</h1>
     <table class="invoice-table">
@@ -88,4 +91,5 @@
         <p>Note: Data Diambil Dari SCMLITE.</p>
     </div>
 </body>
+
 </html>

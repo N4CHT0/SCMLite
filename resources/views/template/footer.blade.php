@@ -1,35 +1,38 @@
 <footer class="main-footer">
     <div class="footer-left">
-      Copyright &copy; 2023 <div class="bullet"></div> Design By <a href="https://nauval.in/">Hannes Tigor Hamonangan Sinaga</a>
+        Copyright &copy; 2023 <div class="bullet"></div> Design By <a href="https://nauval.in/">Hannes Tigor Hamonangan
+            Sinaga</a>
     </div>
     <div class="footer-right">
-      
+
     </div>
 </footer>
 
 <script>
-  // Fungsi untuk mengambil waktu saat ini
-  function showDateTime() {
-    const now = new Date();
-    const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
-    const months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
-    const day = days[now.getDay()];
-    const date = now.getDate();
-    const month = months[now.getMonth()];
-    const year = now.getFullYear();
-    const hours = now.getHours();
-    const minutes = now.getMinutes();
-    const seconds = now.getSeconds();
+    // Fungsi untuk mengambil waktu saat ini
+    function showDateTime() {
+        const now = new Date();
+        const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+        const months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September',
+            'Oktober', 'November', 'Desember'
+        ];
+        const day = days[now.getDay()];
+        const date = now.getDate();
+        const month = months[now.getMonth()];
+        const year = now.getFullYear();
+        const hours = now.getHours();
+        const minutes = now.getMinutes();
+        const seconds = now.getSeconds();
 
-    // Menampilkan waktu saat ini dalam format yang diinginkan
-    const dateTime = `${day}, ${date} ${month} ${year} ${hours}:${minutes}:${seconds}`;
-    document.getElementById('datetime').innerHTML = dateTime;
+        // Menampilkan waktu saat ini dalam format yang diinginkan
+        const dateTime = `${day}, ${date} ${month} ${year} ${hours}:${minutes}:${seconds}`;
+        document.getElementById('datetime').innerHTML = dateTime;
 
-    // Mengulangi fungsi setiap 1 detik
-    setTimeout(showDateTime, 1000);
-  }
+        // Mengulangi fungsi setiap 1 detik
+        setTimeout(showDateTime, 1000);
+    }
 
-  showDateTime(); // Memanggil fungsi saat halaman dimuat
+    showDateTime(); // Memanggil fungsi saat halaman dimuat
 </script>
 
 
@@ -56,4 +59,5 @@
 <script src="{{ asset('assets/js/custom.js') }}"></script>
 
 </body>
+
 </html>
